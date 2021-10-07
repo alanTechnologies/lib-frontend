@@ -1,13 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ReduxThunk from 'redux-thunk';
+import fetchBooksReducer from "./redux/reducer/FetchBooksReducer";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router";
+import HomePage from "./pages/HomePage";
+
+const rootReducer = combineReducers({
+    fetchBooksReducer,
+})
+
+const initialState = {};
+const store = createStore(rootReducer, initialState,
+    applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Provider store ={store}>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path="/available-books">
+                    <HomePage/>
+                </Route>
+                <Redirect from="/" to="/available-books"/>
+        {/*<App/>*/}
+            </Switch>
+        </BrowserRouter>
+    </Provider>,
   document.getElementById('root')
 );
 
