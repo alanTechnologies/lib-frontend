@@ -6,12 +6,13 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import setTypeOfSearchBookDispatch from '../redux/dispatch/SetTypeOfSearchBookDispatch';
 import setBooksDispatch from "../redux/dispatch/SetBooksDispatch";
+import logo from '../assets/library logo.PNG';
 
 class SearchBookComponent extends Component {
     state = {
         searchCondition: 'Title',
         valueFromTextField: '',
-        books:[],
+        books: [],
     }
 
     render() {
@@ -49,9 +50,11 @@ class SearchBookComponent extends Component {
 
         return (
             <div className='search-book-container'>
+                <img src={logo} alt="Canvas Logo" className="logo"/>
                 <div className='input-button-container'>
                     <Input onChange={onChangeInput} placeholder='Search...'/>
                     <Button
+                        style={{backgroundColor: 'green', color: 'white'}}
                         onClick={() => fetchBooksByTitleOrAuthor(typeOfSearchCondition, this.state.valueFromTextField)}> Cauta </Button>
                 </div>
                 <div className='checkbox-container'>
@@ -78,7 +81,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     setTypeOfSearchBookDispatch: setTypeOfSearchBookDispatch,
-    setBooksDispatch:setBooksDispatch,
+    setBooksDispatch: setBooksDispatch,
 }, dispatch)
 
 export default connect(mapStateToProps,

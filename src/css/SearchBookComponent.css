@@ -4,7 +4,14 @@
     margin-top: 10vh;
 }
 
-.input-button-container{
+.input-button-container {
     display: flex;
     flex-direction: row;
+}
+
+.logo {
+    width: 20vw;
+    height: 10vh;
+    margin-inline: auto;
+    margin-bottom: 5vh;
 }
