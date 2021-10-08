@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import fetchBooksDispatch from "../redux/dispatch/FetchBooksDispatch";
 import {Card} from "antd";
 import '../css/HomePage.css';
+import SearchBookComponent from "./SearchBookComponent";
 
 class HomePage extends Component {
 
@@ -13,56 +14,45 @@ class HomePage extends Component {
     }
 
     render() {
-        const { books, loading} = this.props;
+        const {books} = this.props;
 
-        console.log(books);
-        const mappedBooks = books.map(
-            book =>
-            <Card
-            key={book.id}
-            size={'small'}
-            className={'CardBook'}
-            style={{
-                width: 300,
-                marginTop: '2vh',
-                borderRadius: '1vw',
-                backgroundColor: '#f5f5f5'
-            }}
-            >
-                {book.title},
-                {book.author},
-                {book.price},
-                {book.genre}
+        const mappedBooks =
+                books.map(
+                    book =>
+                        <Card
+                            key={book.id}
+                            size={'small'}
+                            className={'CardBook'}
+                            style={{
+                                width: 300,
+                                marginTop: '2vh',
+                                borderRadius: '1vw',
+                                backgroundColor: '#f5f5f5'
+                            }}>
+                            {book.title},
+                            {book.author},
+                            {book.price},
+                            {book.genre}
+                        </Card>)
 
-            </Card>
-        )
-
-
-        return(
+        return (
             <div>
-                {loading ? <p style={{
-                        textAlign: 'center',
-                        fontSize: '200px',
-                        fontWeight: 'bold',
-                        color: 'red'
-                    }}> loading...</p> :
                     <div>
+                        <SearchBookComponent/>
                         {mappedBooks}
-                    </div>}
-
+                    </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    books: state.fetchBooksReducer.books,
-    loading: state.fetchBooksReducer.loading,
-    error: state.fetchBooksReducer.error,
+    books: state.setBooksReducer.books,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchBooksDispatch: fetchBooksDispatch,
+
 }, dispatch)
 
 export default connect(mapStateToProps,

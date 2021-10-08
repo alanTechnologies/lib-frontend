@@ -4,14 +4,18 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReduxThunk from 'redux-thunk';
 import fetchBooksReducer from "./redux/reducer/FetchBooksReducer";
+import setTypeOfSearchBookReducer from './redux/reducer/SetTypeOfSearchBookReducer'
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import {Redirect, Route, Switch} from "react-router";
 import HomePage from "./pages/HomePage";
+import setBooksReducer from './redux/reducer/SetBooksReducer';
 
 const rootReducer = combineReducers({
     fetchBooksReducer,
+    setTypeOfSearchBookReducer,
+    setBooksReducer,
 })
 
 const initialState = {};

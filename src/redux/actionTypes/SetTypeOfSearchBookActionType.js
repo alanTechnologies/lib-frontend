@@ -1,0 +1,2 @@
+export const SET_TYPE_OF_SEARCH_BOOK = 'SET_TYPE_OF_SEARCH_BOOK'
+
