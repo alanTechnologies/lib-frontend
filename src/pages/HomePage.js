@@ -5,6 +5,8 @@ import fetchBooksDispatch from "../redux/dispatch/FetchBooksDispatch";
 import {Card} from "antd";
 import '../css/HomePage.css';
 import SearchBookComponent from "./SearchBookComponent";
+import PaginationList from "react-pagination-list";
+import Grid from "antd/es/card/Grid";
 
 class HomePage extends Component {
 
@@ -19,27 +21,58 @@ class HomePage extends Component {
         const mappedBooks =
                 books.map(
                     book =>
-                        <Card
-                            key={book.id}
-                            size={'small'}
-                            className={'CardBook'}
-                            style={{
-                                width: 300,
-                                marginTop: '2vh',
-                                borderRadius: '1vw',
-                                backgroundColor: '#f5f5f5'
-                            }}>
-                            {book.title},
-                            {book.author},
-                            {book.price},
-                            {book.genre}
-                        </Card>)
+                        <div>
+                            <Card
+                                key={book.id}
+                                size={'small'}
+                                style={{
+                                    width: 300,
+                                    marginTop: '2vh',
+                                    borderRadius: '.5vw',
+                                    backgroundColor: '#f5f5f5',
+                                    margin:'auto'
+                                }}>
+                                {book.title},
+                                {book.author},
+                                {book.price},
+                                {book.genre}
+                            </Card>
+                        </div>
+                       )
 
         return (
-            <div>
-                    <div>
+            <div className='home-page-container'>
+                    <div style={{justifyContent:'center'}}>
                         <SearchBookComponent/>
-                        {mappedBooks}
+                        <PaginationList
+                            data={books}
+                            pageSize={2}
+                            renderItem={(book) => (
+                                <div>
+                                    <Grid
+                                        key={book}
+                                        className='grid'>
+                                        <Card
+                                            key={book.id}
+                                            size={'small'}
+                                            style={{
+                                                width: '100%s',
+                                                marginTop: '2vh',
+                                                borderRadius: '.5vw',
+                                                // backgroundColor: '#f5f5f5',
+                                                margin:'auto'
+                                            }}>
+                                            {book.title},
+                                            {book.author},
+                                            {book.price},
+                                            {book.genre}
+                                        </Card>
+                                    </Grid>
+                                </div>
+                            )}
+                        />
+                        {/*{mappedBooks}*/}
+
                     </div>
             </div>
         )

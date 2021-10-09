@@ -50,6 +50,7 @@ class SearchBookComponent extends Component {
 
         return (
             <div className='search-book-container'>
+
                 <img src={logo} alt="Canvas Logo" className="logo"/>
                 <div className='input-button-container'>
                     <Input onChange={onChangeInput} placeholder='Search...'/>

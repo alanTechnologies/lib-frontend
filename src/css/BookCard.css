@@ -1,0 +1,10 @@
+.container-book-card {
+    display: flex;
+    border-radius: 10vh;
+}
+
+
+.container-price {
+    display: flex;
+}
+
