@@ -11,11 +11,16 @@ import {BrowserRouter} from "react-router-dom";
 import {Redirect, Route, Switch} from "react-router";
 import HomePage from "./pages/HomePage";
 import setBooksReducer from './redux/reducer/SetBooksReducer';
+import setStudentReducer from './redux/reducer/SetStudentReducer';
+import RentABookPage from "./pages/RentABookPage";
+import setCanShowNameReducer from './redux/reducer/SetCanShowNameReducer';
 
 const rootReducer = combineReducers({
     fetchBooksReducer,
     setTypeOfSearchBookReducer,
     setBooksReducer,
+    setStudentReducer,
+    setCanShowNameReducer
 })
 
 const initialState = {};
@@ -23,18 +28,21 @@ const store = createStore(rootReducer, initialState,
     applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
-    <Provider store ={store}>
+
+    <Provider store={store}>
         <BrowserRouter>
             <Switch>
                 <Route exact path="/available-books">
                     <HomePage/>
                 </Route>
+                <Route exact path="/inchiriaza-o-carte">
+                    <RentABookPage/>
+                </Route>
                 <Redirect from="/" to="/available-books"/>
-        {/*<App/>*/}
             </Switch>
         </BrowserRouter>
     </Provider>,
-  document.getElementById('root')
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

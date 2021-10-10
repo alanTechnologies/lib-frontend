@@ -1,0 +1,1 @@
+export const SET_CAN_SHOW_NAME = 'SET_CAN_SHOW_NAME'

@@ -5,7 +5,6 @@ import fetchBooksDispatch from "../redux/dispatch/FetchBooksDispatch";
 import '../css/HomePage.css';
 import SearchBookComponent from "./SearchBookComponent";
 import PaginationList from "react-pagination-list";
-import Grid from "antd/es/card/Grid";
 import BookCard from "../components/BookCard";
 
 class HomePage extends Component {
