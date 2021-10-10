@@ -1,12 +1,12 @@
 .CardBook {
-    width: 20vw;
-    height: 10vh;
     border: 1px solid red;
 }
 .home-page-container{
     display: block;
     box-sizing: border-box;
-    height: 500px;
-    background-color: #7fb07a;
+    /*background-color: #7fb07a;*/
     /*clip-path: ellipse(300% 100% at 300% 0%);*/
+}
+.grid{
+   margin: auto;
 }

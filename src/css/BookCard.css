@@ -1,10 +1,44 @@
 .container-book-card {
+    width: 15vw;
+    height: 50vh;
+    margin: auto;
     display: flex;
-    border-radius: 10vh;
+    flex-direction: column;
+    border: 1px solid;
+    justify-content: center;
+    align-items: center;
 }
-
-
+.container-book-card:hover{
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border-color: white;
+    -webkit-transition: transform 0.4s ease-in-out;
+    -moz-transition: transform 0.4s ease-in-out;
+    -o-transition: transform 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
 .container-price {
-    display: flex;
+    height: 10%;
+    justify-content: center;
 }
 
+.container-books{
+    height: 10%;
+}
+.buttons-container{
+    height: 10%;
+}
+.button-style-1{
+    background-color: seagreen;
+    color: white;
+}
+.button-style-2{
+    background-color: darkseagreen;
+    color: white;
+}
