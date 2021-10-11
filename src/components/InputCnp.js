@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {Button} from 'antd';
+import {Button, Input} from 'antd';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import setStudentDispatch from "../redux/dispatch/SetStudentDispatch";
 import setCanShowNameDispatch from '../redux/dispatch/SetCanShowNameDispatch';
 import setNotRecognizedCnpDispatch from "../redux/dispatch/SetNotRecognizedCnp";
+import '../css/InputCnp.css';
 
 class InputCnp extends Component {
 
@@ -40,7 +41,7 @@ class InputCnp extends Component {
 
         return (
             <div className='container-button-input'>
-                <input onChange={event => onChange(event)} placeholder='Introduceti CNP' className='number'/>
+                <Input onChange={event => onChange(event)} placeholder='Introduceti CNP' className='number'/>
                 <Button onClick={() => getStudentByCnpFromBackend(this.state.cnp)} type="primary"
                         className='button-style-2'>Valideaza</Button>
 

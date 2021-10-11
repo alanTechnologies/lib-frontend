@@ -13,14 +13,16 @@ class RentABookPage extends Component {
     }
 
     render() {
-        const {student, canShowName,notRecognizedCnp} = this.props;
+        const {student, canShowName, notRecognizedCnp} = this.props;
         console.log(this.props)
 
         return (
             <div className='container-inchiriaza-carte'>
                 <InputCnp/>
-                {canShowName ? <p>Salut, {student.name}</p> : null}
-                {notRecognizedCnp ? <p>Nu exista nicio persoana cu acest CNP</p> : null}
+                <div className='container-name-or-error'>
+                    {canShowName ? <p>Salut, {student.name}</p> : null}
+                    {notRecognizedCnp ? <p>Nu exista nicio persoana cu acest CNP</p> : null}
+                </div>
             </div>
         )
     }
