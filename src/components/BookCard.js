@@ -18,7 +18,6 @@ class BookCard extends Component {
             <div className='container-book-card'>
                 <img
                     src={this.props.book.url}
-                    // src="https://humanitas.ro/assets/images/products/978-973-50-3283-8.jpg"
                      style={{height: '60%', width: '80%'}}/>
 
                 <div className='container-price' style={{fontWeight: 'bolder', fontSize: '1.5vw'}}>

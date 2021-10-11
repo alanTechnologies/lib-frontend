@@ -9,6 +9,7 @@ class InputCnp extends Component {
 
     state = {
         cnp: '',
+        rentBookButtonDisabled: true,
     }
 
     render() {
@@ -26,14 +27,22 @@ class InputCnp extends Component {
                     r.json())
                 .then(r => this.props.setStudentDispatch(r))
                 .then(() => this.props.setCanShowNameDispatch(true))
-                .catch(err => console.log(err))
+                .then(()=> this.setState({
+                    rentBookButtonDisabled:false
+                }))
+                .catch(err => this.setState({
+                    rentBookButtonDisabled:true
+                }))
         }
 
         return (
             <div className='container-button-input'>
                 <input onChange={event => onChange(event)} placeholder='Introduceti CNP' className='number'/>
                 <Button onClick={() => getStudentByCnpFromBackend(this.state.cnp)} type="primary"
-                        className='button-inscriere'>Inchiriaza</Button>
+                        className='button-style-2'>Valideaza</Button>
+
+                <Button  disabled={this.state.rentBookButtonDisabled} onClick={() => console.log("am inchiriat o carte")} type="primary"
+                        className='button-style-2'>Inchiriaza</Button>
             </div>
         )
     }
