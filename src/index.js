@@ -14,13 +14,16 @@ import setBooksReducer from './redux/reducer/SetBooksReducer';
 import setStudentReducer from './redux/reducer/SetStudentReducer';
 import RentABookPage from "./pages/RentABookPage";
 import setCanShowNameReducer from './redux/reducer/SetCanShowNameReducer';
+import setNotRecognizedCnpReducer from './redux/reducer/SetNotRecognizedCnpReducer';
 
 const rootReducer = combineReducers({
     fetchBooksReducer,
     setTypeOfSearchBookReducer,
     setBooksReducer,
     setStudentReducer,
-    setCanShowNameReducer
+    setCanShowNameReducer,
+    setNotRecognizedCnpReducer,
+
 })
 
 const initialState = {};
@@ -28,7 +31,6 @@ const store = createStore(rootReducer, initialState,
     applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
-
     <Provider store={store}>
         <BrowserRouter>
             <Switch>

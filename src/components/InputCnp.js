@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import setStudentDispatch from "../redux/dispatch/SetStudentDispatch";
 import setCanShowNameDispatch from '../redux/dispatch/SetCanShowNameDispatch';
+import setNotRecognizedCnpDispatch from "../redux/dispatch/SetNotRecognizedCnp";
 
 class InputCnp extends Component {
 
@@ -22,17 +23,17 @@ class InputCnp extends Component {
         }
 
         const getStudentByCnpFromBackend = cnp => {
+
             return fetch('http://localhost:8080/students-by-CNP/' + cnp)
-                .then(r =>
-                    r.json())
+                .then(r =>r.json())
                 .then(r => this.props.setStudentDispatch(r))
                 .then(() => this.props.setCanShowNameDispatch(true))
-                .then(()=> this.setState({
-                    rentBookButtonDisabled:false
-                }))
-                .catch(err => this.setState({
-                    rentBookButtonDisabled:true
-                }))
+                .then(()=> this.setState({rentBookButtonDisabled:false}))
+                .then(() => this.props.setNotRecognizedCnpDispatch(false))
+                .catch(() => this.props.setNotRecognizedCnpDispatch(true))
+                .catch(() => this.props.setCanShowNameDispatch(false))
+                .catch(() => this.setState({rentBookButtonDisabled:true}))
+
         }
 
         return (
@@ -57,6 +58,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
     setStudentDispatch: setStudentDispatch,
     setCanShowNameDispatch: setCanShowNameDispatch,
+    setNotRecognizedCnpDispatch: setNotRecognizedCnpDispatch,
 
 
 }, dispatch)
