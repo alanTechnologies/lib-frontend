@@ -25,14 +25,16 @@ class InputCnp extends Component {
         const getStudentByCnpFromBackend = cnp => {
 
             return fetch('http://localhost:8080/students-by-CNP/' + cnp)
-                .then(r =>r.json())
+                .then(r => r.json())
                 .then(r => this.props.setStudentDispatch(r))
                 .then(() => this.props.setCanShowNameDispatch(true))
-                .then(()=> this.setState({rentBookButtonDisabled:false}))
                 .then(() => this.props.setNotRecognizedCnpDispatch(false))
-                .catch(() => this.props.setNotRecognizedCnpDispatch(true))
-                .catch(() => this.props.setCanShowNameDispatch(false))
-                .catch(() => this.setState({rentBookButtonDisabled:true}))
+                .then(() => this.setState({rentBookButtonDisabled: false}))
+                .catch(() => {
+                    this.props.setCanShowNameDispatch(false)
+                    this.props.setNotRecognizedCnpDispatch(true)
+                    this.setState({rentBookButtonDisabled : true})
+                })
 
         }
 
@@ -42,7 +44,8 @@ class InputCnp extends Component {
                 <Button onClick={() => getStudentByCnpFromBackend(this.state.cnp)} type="primary"
                         className='button-style-2'>Valideaza</Button>
 
-                <Button  disabled={this.state.rentBookButtonDisabled} onClick={() => console.log("am inchiriat o carte")} type="primary"
+                <Button disabled={this.state.rentBookButtonDisabled} onClick={() => console.log("am inchiriat o carte")}
+                        type="primary"
                         className='button-style-2'>Inchiriaza</Button>
             </div>
         )
