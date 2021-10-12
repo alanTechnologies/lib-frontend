@@ -55,7 +55,7 @@ class SearchBookComponent extends Component {
                 <div className='input-button-container'>
                     <Input onChange={onChangeInput} placeholder='Search...'/>
                     <Button
-                        style={{backgroundColor: 'green', color: 'white'}}
+                        style={{backgroundColor: '#333d51', color: 'white'}}
                         onClick={() => fetchBooksByTitleOrAuthor(typeOfSearchCondition, this.state.valueFromTextField)}> Cauta </Button>
                 </div>
                 <div className='checkbox-container'>

@@ -4,6 +4,7 @@ import {Button} from 'antd';
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
+import setBookToBuyOrRentDispatch from '../redux/dispatch/SetBookToBuyOrRentDispatch'
 
 class BookCard extends Component {
     constructor(props) {
@@ -18,28 +19,33 @@ class BookCard extends Component {
             <div className='container-book-card'>
                 <img
                     src={this.props.book.url}
-                     style={{height: '60%', width: '80%'}}/>
+                    style={{height: '60%', width: '80%'}}/>
 
                 <div className='container-price' style={{fontWeight: 'bolder', fontSize: '1.5vw'}}>
                     {this.props.book.title}
                 </div>
-                <div className='container-books' style={{fontWeight: 'bold', fontSize: '1vw'}}>
+                <div className='container-books' style={{fontWeight: 'bold', fontSize: '1vw',}}>
                     {this.props.book.author}
                 </div>
 
                 <div className='buttons-container'>
                     <Button
-                        className='button-style-1'
+                        style={{backgroundColor: '#d3ac2b', color: 'white'}}
                     >
                         Cumparati
                     </Button>
 
-                    <Button onClick={() => history.push('/inchiriaza-o-carte')}
-                            className='button-style-2'
+                    <Button onClick={() => {
+                        history.push('/inchiriaza-o-carte')
+                        console.log(this.props.book)
+                        this.props.setBookToBuyOrRentDispatch(this.props.book)
+                    }}
+                            style={{backgroundColor: '#333d51', color: 'white'}}
                     >
                         Inchiriati
                     </Button>
                 </div>
+                <p>{this.props.book.stock} carti in stoc</p>
 
             </div>
         )
@@ -49,10 +55,11 @@ class BookCard extends Component {
 
 const mapStateToProps = state => ({
     student: state.setStudentReducer.student,
+    bookToRentOrBuy: state.setBookToRentOrBuyReducer.bookToRentOrBuy,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+    setBookToBuyOrRentDispatch:setBookToBuyOrRentDispatch,
 }, dispatch)
 
 export default connect(mapStateToProps,
