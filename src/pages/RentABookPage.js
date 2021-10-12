@@ -22,7 +22,7 @@ class RentABookPage extends Component {
             <div className='container-inchiriaza-carte'>
                 <InputCnp/>
                 <div className='container-name-or-error'>
-                    {canShowName ? <p>Salut, {student.name} {student.cnp}</p> : null}
+                    {canShowName ? <p>Salut, {student.name} </p> : null}
                     {notRecognizedCnp ? <p>Nu exista nicio persoana cu acest CNP</p> : null}
                 </div>
                 <RentBookForm/>

@@ -1,7 +1,8 @@
 .container-book-card {
     width: 15vw;
     height: 50vh;
-    margin: auto;
+    margin-inline: auto;
+    margin-top: 2%;
     display: flex;
     flex-direction: column;
     border: 1px solid;
