@@ -13,14 +13,14 @@ class RentBookForm extends Component {
     }
 
     render() {
-        const {canShowName,bookToRentOrBuy} = this.props;
+        const {canShowName, bookToRentOrBuy} = this.props;
 
         return (
             <div style={{alignSelf: 'center', justifySelf: 'center'}}>
 
                 {canShowName ?
                     <div className='container-dates'>
-                        <div style={{marginInline:'1vw'}}>
+                        <div style={{marginInline: '1vw'}}>
                             <p>Data ridicare</p>
                             <DatePicker
                                 selected={this.state.dateRent}
@@ -32,7 +32,7 @@ class RentBookForm extends Component {
                             />
                         </div>
 
-                        <div style={{marginInline:'1vw'}}>
+                        <div style={{marginInline: '1vw'}}>
                             <p>Data returnare</p>
                             <DatePicker
                                 selected={this.state.dateReturn}
@@ -58,12 +58,6 @@ class RentBookForm extends Component {
                     </div>
 
                     <div className='buttons-container'>
-                        <Button
-                            style={{backgroundColor: '#d3ac2b', color: 'white'}}
-                        >
-                            Cumparati
-                        </Button>
-
                         <Button onClick={() => {
                             // history.push('/inchiriaza-o-carte')
                             this.props.setBookToBuyOrRentDispatch(bookToRentOrBuy)
@@ -76,7 +70,6 @@ class RentBookForm extends Component {
                     <p>{bookToRentOrBuy.stock} carti in stoc</p>
 
                 </div>
-
 
 
             </div>
@@ -96,7 +89,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators(
     {
-        setBookToBuyOrRentDispatch:setBookToBuyOrRentDispatch,
+        setBookToBuyOrRentDispatch: setBookToBuyOrRentDispatch,
     }
     , dispatch)
 
