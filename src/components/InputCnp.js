@@ -44,10 +44,6 @@ class InputCnp extends Component {
                 <Input onChange={event => onChange(event)} placeholder='Introduceti CNP' className='number'/>
                 <Button onClick={() => getStudentByCnpFromBackend(this.state.cnp)} type="primary"
                         className='button-style-2'>Valideaza</Button>
-
-                <Button disabled={this.state.rentBookButtonDisabled} onClick={() => console.log("am inchiriat o carte")}
-                        type="primary"
-                        className='button-style-2'>Inchiriaza</Button>
             </div>
         )
     }
