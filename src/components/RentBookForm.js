@@ -63,7 +63,7 @@ class RentBookForm extends Component {
                             </div>
 
                             <div className='buttons-container'>
-                                {!student.validForRental ?
+                                {student.validForRental ?
                                     <Button
                                         disabled={false}
                                         onClick={() => {
