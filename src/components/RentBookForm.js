@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import '../css/RentBookForm.css';
 import setBookToBuyOrRentDispatch from '../redux/dispatch/SetBookToBuyOrRentDispatch'
+import axios from 'axios';
 
 class RentBookForm extends Component {
     state = {
@@ -16,9 +17,26 @@ class RentBookForm extends Component {
         const {canShowName, bookToRentOrBuy, student} = this.props;
         const content = (
             <div>
-               <p> nu poti inchiria deoarece ai prea multe intarzieri</p>
+                <p> nu poti inchiria deoarece ai prea multe intarzieri</p>
             </div>
         );
+
+        const sendBookToRentData = (startDate, endDate, idBook, cnp) => {
+            console.log(startDate)
+            console.log(endDate)
+            console.log(idBook)
+            console.log(cnp)
+
+            const startDay = startDate.toISOString().substring(0,10);
+            const endDay = endDate.toISOString().substring(0,10);
+
+            axios.post(`http://localhost:8080/rent-a-book?cnp=${cnp}&idBook=${idBook}&startDay=${startDay}&endDay=${endDay}`,
+
+            )
+                .then(r => console.log(r))
+                .catch(err => console.log(err))
+
+        }
 
         return (
             <div style={{alignSelf: 'center', justifySelf: 'center'}}>
@@ -66,23 +84,19 @@ class RentBookForm extends Component {
                                 {student.validForRental ?
                                     <Button
                                         disabled={false}
-                                        onClick={() => {
-                                            this.props.setBookToBuyOrRentDispatch(bookToRentOrBuy)
-                                        }}
+                                        onClick={() => sendBookToRentData(this.state.dateRent, this.state.dateReturn, bookToRentOrBuy.id, student.cnp)}
                                         type="primary">
                                         Inchiriati
                                     </Button> :
                                     <Popover content={content} title="Title">
                                         <Button
                                             disabled={true}
-                                            onClick={() => {
-                                                this.props.setBookToBuyOrRentDispatch(bookToRentOrBuy)
-                                            }}
+                                            onClick={() => sendBookToRentData(this.state.dateRent, this.state.dateReturn, bookToRentOrBuy.id, student.cnp)}
                                             type="primary">
                                             Inchiriati
                                         </Button>
                                     </Popover>
-                                  }
+                                }
                             </div>
                             <p>{bookToRentOrBuy.stock} carti in stoc</p>
 
