@@ -16,6 +16,7 @@ import RentABookPage from "./pages/RentABookPage";
 import setCanShowNameReducer from './redux/reducer/SetCanShowNameReducer';
 import setNotRecognizedCnpReducer from './redux/reducer/SetNotRecognizedCnpReducer';
 import setBookToRentOrBuyReducer from "./redux/reducer/SetBookToRentOrBuyReducer";
+import setIsModalVisibleReducer from "./redux/reducer/SetIsModalVisibleReducer";
 
 const rootReducer = combineReducers({
     fetchBooksReducer,
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     setStudentReducer,
     setCanShowNameReducer,
     setNotRecognizedCnpReducer,
-    setBookToRentOrBuyReducer
+    setBookToRentOrBuyReducer,
+    setIsModalVisibleReducer,
 })
 
 const initialState = {};

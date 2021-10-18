@@ -1,11 +1,14 @@
 import React, {Component} from "react";
-import {Button, DatePicker, Popover} from "antd";
+import {Button, Modal, DatePicker, Popover} from "antd";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import '../css/RentBookForm.css';
+import 'antd/dist/antd.css';
 import setBookToBuyOrRentDispatch from '../redux/dispatch/SetBookToBuyOrRentDispatch'
+import setIsModalVisibleDispatch from '../redux/dispatch/SetIsModalVisibleDispatch'
 import axios from 'axios';
+import 'antd/dist/antd.css';
 
 class RentBookForm extends Component {
     state = {
@@ -14,12 +17,14 @@ class RentBookForm extends Component {
     }
 
     render() {
-        const {canShowName, bookToRentOrBuy, student} = this.props;
+        const {canShowName, bookToRentOrBuy, student,isModalVisible } = this.props;
         const content = (
             <div>
                 <p> nu poti inchiria deoarece ai prea multe intarzieri</p>
             </div>
         );
+
+        const handleOkAndCancel = () =>  this.props.setIsModalVisibleDispatch(false)
 
         const sendBookToRentData = (startDate, endDate, idBook, cnp) => {
             console.log(startDate)
@@ -27,11 +32,10 @@ class RentBookForm extends Component {
             console.log(idBook)
             console.log(cnp)
 
-            const startDay = startDate.toISOString().substring(0,10);
-            const endDay = endDate.toISOString().substring(0,10);
+            const startDay = startDate.toISOString().substring(0, 10);
+            const endDay = endDate.toISOString().substring(0, 10);
 
             axios.post(`http://localhost:8080/rent-a-book?cnp=${cnp}&idBook=${idBook}&startDay=${startDay}&endDay=${endDay}`,
-
             )
                 .then(r => console.log(r))
                 .catch(err => console.log(err))
@@ -84,14 +88,20 @@ class RentBookForm extends Component {
                                 {student.validForRental ?
                                     <Button
                                         disabled={false}
-                                        onClick={() => sendBookToRentData(this.state.dateRent, this.state.dateReturn, bookToRentOrBuy.id, student.cnp)}
+                                        onClick={() => {
+                                            this.props.setIsModalVisibleDispatch(true)
+                                            sendBookToRentData(this.state.dateRent, this.state.dateReturn, bookToRentOrBuy.id, student.cnp)
+                                        }}
                                         type="primary">
                                         Inchiriati
                                     </Button> :
                                     <Popover content={content} title="Title">
                                         <Button
                                             disabled={true}
-                                            onClick={() => sendBookToRentData(this.state.dateRent, this.state.dateReturn, bookToRentOrBuy.id, student.cnp)}
+                                            onClick={() => {
+                                                this.props.setIsModalVisibleDispatch(true)
+                                            sendBookToRentData(this.state.dateRent, this.state.dateReturn, bookToRentOrBuy.id, student.cnp)
+                                            }}
                                             type="primary">
                                             Inchiriati
                                         </Button>
@@ -99,12 +109,12 @@ class RentBookForm extends Component {
                                 }
                             </div>
                             <p>{bookToRentOrBuy.stock} carti in stoc</p>
-
                         </div>
                     </div>
-
                     : null}
-
+                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOkAndCancel} onCancel={handleOkAndCancel}>
+                  <p>Lectura placuta </p>
+                </Modal>
             </div>
         )
     }
@@ -112,20 +122,17 @@ class RentBookForm extends Component {
 }
 
 const mapStateToProps = state => ({
-        student: state.setStudentReducer.student
-        ,
-        canShowName: state.setCanShowNameReducer.canShowName
-        ,
-        bookToRentOrBuy: state.setBookToRentOrBuyReducer.bookToRentOrBuy
-        ,
-
+        student: state.setStudentReducer.student        ,
+        canShowName: state.setCanShowNameReducer.canShowName        ,
+        bookToRentOrBuy: state.setBookToRentOrBuyReducer.bookToRentOrBuy        ,
+        isModalVisible: state.setIsModalVisibleReducer.isModalVisible        ,
     }
-
 )
 
 const mapDispatchToProps = dispatch => bindActionCreators(
     {
         setBookToBuyOrRentDispatch: setBookToBuyOrRentDispatch,
+        setIsModalVisibleDispatch: setIsModalVisibleDispatch,
     }
     , dispatch)
 
