@@ -15,7 +15,7 @@ class RentABookPage extends Component {
     }
 
     render() {
-        const {student, canShowName, notRecognizedCnp,bookToRentOrBuy } = this.props;
+        const {student, canShowName, notRecognizedCnp,bookToRentOrBuy,history } = this.props;
         console.log(student)
 
         return (

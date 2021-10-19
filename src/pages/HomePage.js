@@ -9,12 +9,8 @@ import BookCard from "../components/BookCard";
 
 class HomePage extends Component {
 
-    componentDidMount() {
-        const {fetchBooksDispatch} = this.props;
-        fetchBooksDispatch();
-    }
-
     render() {
+
         const {books} = this.props;
 
         return (
