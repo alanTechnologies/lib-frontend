@@ -20,6 +20,7 @@ class RentBookForm extends Component {
     render() {
         const {
             canShowName,
+            history,
             bookToRentOrBuy,
             student,
             isModalVisible,
@@ -122,7 +123,9 @@ class RentBookForm extends Component {
                         </div>
                     </div>
                     : null}
-                <Modal title={title} visible={isModalVisible} onOk={handleOkAndCancel}
+                <Modal title={title} visible={isModalVisible} onOk={()=>{history.push('/available-books')
+                    this.props.setIsModalVisibleDispatch(false);
+                }}
                        onCancel={handleOkAndCancel}>
                     <p>{body}</p>
                 </Modal>
