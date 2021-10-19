@@ -17,6 +17,7 @@ import setCanShowNameReducer from './redux/reducer/SetCanShowNameReducer';
 import setNotRecognizedCnpReducer from './redux/reducer/SetNotRecognizedCnpReducer';
 import setBookToRentOrBuyReducer from "./redux/reducer/SetBookToRentOrBuyReducer";
 import setIsModalVisibleReducer from "./redux/reducer/SetIsModalVisibleReducer";
+import setModalTitleReducer from "./redux/reducer/SetModalTitleReducer";
 
 const rootReducer = combineReducers({
     fetchBooksReducer,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
     setNotRecognizedCnpReducer,
     setBookToRentOrBuyReducer,
     setIsModalVisibleReducer,
+    setModalTitleReducer,
 })
 
 const initialState = {};
