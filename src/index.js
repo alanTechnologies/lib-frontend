@@ -18,6 +18,7 @@ import setNotRecognizedCnpReducer from './redux/reducer/SetNotRecognizedCnpReduc
 import setBookToRentOrBuyReducer from "./redux/reducer/SetBookToRentOrBuyReducer";
 import setIsModalVisibleReducer from "./redux/reducer/SetIsModalVisibleReducer";
 import setModalTitleReducer from "./redux/reducer/SetModalTitleReducer";
+import setModalBodyReducer from "./redux/reducer/SetModalBodyReducer";
 
 const rootReducer = combineReducers({
     fetchBooksReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     setBookToRentOrBuyReducer,
     setIsModalVisibleReducer,
     setModalTitleReducer,
+    setModalBodyReducer,
 })
 
 const initialState = {};

@@ -1,0 +1,1 @@
+export const SET_MODAL_BODY = 'SET_MODAL_BODY'

@@ -6,6 +6,7 @@ import {withRouter} from "react-router";
 import setBookToBuyOrRentDispatch from '../redux/dispatch/SetBookToBuyOrRentDispatch'
 import setIsModalVisibleDispatch from '../redux/dispatch/SetIsModalVisibleDispatch'
 import setModalTitleDispatch from "../redux/dispatch/SetModalTitleDispatch";
+import setModalBodyDispatch from "../redux/dispatch/SetModalBodyDispatch";
 import '../css/RentBookForm.css';
 import 'antd/dist/antd.css';
 import axios from 'axios';
@@ -14,7 +15,6 @@ class RentBookForm extends Component {
     state = {
         dateRent: new Date(),
         dateReturn: new Date(),
-        modalBody: 'Lectura placuta',
     }
 
     render() {
@@ -24,6 +24,7 @@ class RentBookForm extends Component {
             student,
             isModalVisible,
             title,
+            body,
         } = this.props;
         const content = (
             <div>
@@ -34,28 +35,21 @@ class RentBookForm extends Component {
         const handleOkAndCancel = () => this.props.setIsModalVisibleDispatch(false)
 
         const sendBookToRentData = (startDate, endDate, idBook, cnp) => {
-            console.log(startDate)
-            console.log(endDate)
-            console.log(idBook)
-            console.log(cnp)
-
             const startDay = startDate.toISOString().substring(0, 10);
             const endDay = endDate.toISOString().substring(0, 10);
 
-            console.log(axios.post(`http://localhost:8080/rent-a-book?cnp=${cnp}&idBook=${idBook}&startDay=${startDay}&endDay=${endDay}`,
-            )
+            console.log(axios.post(`http://localhost:8080/rent-a-book?cnp=${cnp}&idBook=${idBook}&startDay=${startDay}&endDay=${endDay}`,)
                 .then(r =>{
                     if (r.status === 200) {
+                        this.props.setModalBodyDispatch('Lectura placuta')
                         this.props.setModalTitleDispatch('Multumim')
                     }})
                 .catch(err => {
                         if (err.response.status === 406) {
+                            this.props.setModalBodyDispatch('Ati inchiriat deja aceasta carte')
                             this.props.setModalTitleDispatch('Ne pare rau')
                         }
                     }))
-
-
-
         }
 
         return (
@@ -130,7 +124,7 @@ class RentBookForm extends Component {
                     : null}
                 <Modal title={title} visible={isModalVisible} onOk={handleOkAndCancel}
                        onCancel={handleOkAndCancel}>
-                    <p>{this.state.modalBody}</p>
+                    <p>{body}</p>
                 </Modal>
             </div>
         )
@@ -144,6 +138,7 @@ const mapStateToProps = state => ({
         bookToRentOrBuy: state.setBookToRentOrBuyReducer.bookToRentOrBuy,
         isModalVisible: state.setIsModalVisibleReducer.isModalVisible,
         title: state.setModalTitleReducer.title,
+        body: state.setModalBodyReducer.body,
     }
 )
 
@@ -152,6 +147,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
         setBookToBuyOrRentDispatch: setBookToBuyOrRentDispatch,
         setIsModalVisibleDispatch: setIsModalVisibleDispatch,
         setModalTitleDispatch: setModalTitleDispatch,
+        setModalBodyDispatch: setModalBodyDispatch,
     }
     , dispatch)
 
