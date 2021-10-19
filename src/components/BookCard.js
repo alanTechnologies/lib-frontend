@@ -35,7 +35,9 @@ class BookCard extends Component {
                         Cumparati
                     </Button>
 
-                    <Button onClick={() => {
+                    <Button
+                        disabled={this.props.book.stock === 0}
+                        onClick={() => {
                         history.push('/inchiriaza-o-carte')
                         console.log(this.props.book)
                         this.props.setBookToBuyOrRentDispatch(this.props.book)
