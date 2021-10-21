@@ -16,25 +16,19 @@ class ReturnABookPage extends Component {
             console.log(event.target.value)
         }
 
-        const getStudentByCnpFromBackend = cnp => {
+        const getRentBookOfStudentByStudentCnp = cnp => {
 
             return fetch('http://localhost:8080/students-by-CNP/' + cnp)
                 .then(r => r.json())
-                .then(r => this.props.setStudentDispatch(r))
-                .then(() => this.props.setCanShowNameDispatch(true))
                 .then(() => this.props.setNotRecognizedCnpDispatch(false))
-                .then(() => this.setState({rentBookButtonDisabled: false}))
-                .catch(() => {
-                    this.props.setCanShowNameDispatch(false)
-                    this.props.setNotRecognizedCnpDispatch(true)
-                    this.setState({rentBookButtonDisabled: true})
+                .catch((err) => {console.log(err)
                 })
 
         }
         return (
             <div className='return-book-container'>
                 <Input onChange={event => onChange(event)} placeholder='Introduceti CNP' className='number'/>
-                <Button onClick={() => getStudentByCnpFromBackend(this.state.cnp)} type="primary"
+                <Button onClick={() => getRentBookOfStudentByStudentCnp(this.state.cnp)} type="primary"
                         className='button-style-2'>Valideaza</Button>
             </div>
         )

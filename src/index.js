@@ -19,6 +19,7 @@ import setBookToRentOrBuyReducer from "./redux/reducer/SetBookToRentOrBuyReducer
 import setIsModalVisibleReducer from "./redux/reducer/SetIsModalVisibleReducer";
 import setModalTitleReducer from "./redux/reducer/SetModalTitleReducer";
 import setModalBodyReducer from "./redux/reducer/SetModalBodyReducer";
+import fetchRentBooksReducer from "./redux/reducer/FetchRentBooksByStudentCnpReducer";
 import ReturnABookPage from "./pages/ReturnABookPage";
 
 const rootReducer = combineReducers({
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
     setIsModalVisibleReducer,
     setModalTitleReducer,
     setModalBodyReducer,
+    fetchRentBooksReducer,
 })
 
 const initialState = {};
