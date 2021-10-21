@@ -18,9 +18,9 @@ class ReturnABookPage extends Component {
 
         const getRentBookOfStudentByStudentCnp = cnp => {
 
-            return fetch('http://localhost:8080/students-by-CNP/' + cnp)
+            return fetch('http://localhost:8080/student-rent-book-list/' + cnp)
                 .then(r => r.json())
-                .then(() => this.props.setNotRecognizedCnpDispatch(false))
+                .then(r=> console.log(r))
                 .catch((err) => {console.log(err)
                 })
 
