@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import setTypeOfSearchBookDispatch from '../redux/dispatch/SetTypeOfSearchBookDispatch';
 import setBooksDispatch from "../redux/dispatch/SetBooksDispatch";
 import logo from '../assets/library logo.PNG';
+import {withRouter} from "react-router";
 
 class SearchBookComponent extends Component {
     state = {
@@ -16,6 +17,8 @@ class SearchBookComponent extends Component {
     }
 
     render() {
+
+        const {history} = this.props;
 
         const onChangeInput = event => this.setState({
             valueFromTextField: event.target.value
@@ -53,10 +56,14 @@ class SearchBookComponent extends Component {
 
                 <img src={logo} alt="Canvas Logo" className="logo"/>
                 <div className='input-button-container'>
+
                     <Input onChange={onChangeInput} placeholder='Search...'/>
                     <Button
                         style={{backgroundColor: '#333d51', color: 'white'}}
                         onClick={() => fetchBooksByTitleOrAuthor(typeOfSearchCondition, this.state.valueFromTextField)}> Cauta </Button>
+                    <Button
+                        style={{backgroundColor: 'indianred', color: 'white'}}
+                        onClick={() => history.push('/returneaza-o-carte')}> Returneaza o carte </Button>
                 </div>
                 <div className='checkbox-container'>
                     <Radio.Group onChange={onChange} value={typeOfSearchCondition} className='container-radio-buttons'>
@@ -87,4 +94,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 export default connect(mapStateToProps,
     mapDispatchToProps)
-(SearchBookComponent);
+(withRouter(SearchBookComponent));
