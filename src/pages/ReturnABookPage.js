@@ -6,7 +6,7 @@ import setStudentDispatch from "../redux/dispatch/SetStudentDispatch";
 import setCanShowNameDispatch from "../redux/dispatch/SetCanShowNameDispatch";
 import fetchRentBooksByStudentCnpDispatch from "../redux/dispatch/FetchRentBooksByStudentCnpDispatch";
 import setNotRecognizedCnpDispatch from "../redux/dispatch/SetNotRecognizedCnp";
-import BookCard from "../components/BookCard";
+import BookCardToReturn from "../components/BookCardToReturn";
 import PaginationList from "react-pagination-list";
 
 class ReturnABookPage extends Component {
@@ -20,14 +20,6 @@ class ReturnABookPage extends Component {
             console.log(event.target.value)
         }
 
-        const getRentBookOfStudentByStudentCnp = cnp => {
-            return fetch('http://localhost:8080/student-rent-book-list/' + cnp)
-                .then(r => r.json())
-                .then(r=> console.log(r))
-                .catch((err) => {console.log(err)
-                })
-
-        }
         return (
             <div className='return-book-container'>
                 <Input onChange={event => onChange(event)} placeholder='Introduceti CNP' className='number'/>
@@ -42,7 +34,7 @@ class ReturnABookPage extends Component {
                     data={rentBooks}
                     pageSize={3}
                     renderItem={(rentBook) => (
-                        <BookCard book={rentBook.book}/>
+                        <BookCardToReturn rentBook ={rentBook} book={rentBook.book}/>
                     )}
                 />
 
