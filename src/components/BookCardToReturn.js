@@ -5,15 +5,24 @@ import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {withRouter} from "react-router";
 import setBookToBuyOrRentDispatch from '../redux/dispatch/SetBookToBuyOrRentDispatch'
+import axios from "axios";
 
 class BookCardToReturn extends Component {
+
     constructor(props) {
         super(props);
     }
 
     render() {
+        const {student} = this.props;
 
-        const {history} = this.props;
+        const returnABook = (cnp, idBook) => {
+            axios.delete(`http://localhost:8080/return-a-book?cnp=${cnp}&idBook=${idBook}`)
+                .then(r => console.log(r.status))
+                .catch(err => {
+                    console.log(err)
+                })
+        }
 
         return (
             <div className='container-book-card'>
@@ -30,12 +39,15 @@ class BookCardToReturn extends Component {
 
                 <div className='buttons-container'>
                     <Button
+                        onClick={()=>
+                            returnABook(student.cnp,this.props.rentBook.book.id)
+                        }
                         style={{backgroundColor: 'indianred', color: 'white'}}
                     >
                         Returneaza
                     </Button>
                 </div>
-                <p style={{fontWeight:'bolder'}}> Inchiriata la {this.props.rentBook.startDate} </p>
+                <p style={{fontWeight: 'bolder'}}> Inchiriata la {this.props.rentBook.startDate} </p>
 
             </div>
         )
@@ -46,10 +58,12 @@ class BookCardToReturn extends Component {
 const mapStateToProps = state => ({
     student: state.setStudentReducer.student,
     bookToRentOrBuy: state.setBookToRentOrBuyReducer.bookToRentOrBuy,
+    rentBooks: state.fetchRentBooksReducer.rentBooks,
+
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    setBookToBuyOrRentDispatch:setBookToBuyOrRentDispatch,
+    setBookToBuyOrRentDispatch: setBookToBuyOrRentDispatch,
 }, dispatch)
 
 export default connect(mapStateToProps,

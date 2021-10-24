@@ -20,24 +20,32 @@ class ReturnABookPage extends Component {
             console.log(event.target.value)
         }
 
+        const getStudentByCnpFromBackend = cnp => {
+
+            return fetch('http://localhost:8080/students-by-CNP/' + cnp)
+                .then(r => r.json())
+                .then(r => this.props.setStudentDispatch(r))
+                .catch((err) => {console.log(err)
+                })
+
+        }
+
         return (
             <div className='return-book-container'>
                 <Input onChange={event => onChange(event)} placeholder='Introduceti CNP' className='number'/>
-                <Button onClick={() =>
-                    // getRentBookOfStudentByStudentCnp(this.state.cnp)
+                <Button onClick={() => {
+                    console.log(this.state.cnp)
+                    getStudentByCnpFromBackend(this.state.cnp).then(r=> this.props.setStudentDispatch(r.payload.student))
                     this.props.fetchRentBooksByStudentCnpDispatch(this.state.cnp)
-                } type="primary"
+                }}
+                        type="primary"
                         className='button-style-2'>Valideaza</Button>
-
 
                 <PaginationList
                     data={rentBooks}
                     pageSize={3}
-                    renderItem={(rentBook) => (
-                        <BookCardToReturn rentBook ={rentBook} book={rentBook.book}/>
-                    )}
+                    renderItem={(rentBook) => (<BookCardToReturn rentBook={rentBook} book={rentBook.book}/>)}
                 />
-
             </div>
         )
     }
