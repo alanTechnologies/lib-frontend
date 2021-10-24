@@ -12,7 +12,9 @@ import PaginationList from "react-pagination-list";
 class ReturnABookPage extends Component {
 
     render() {
-        const {rentBooks} = this.props;
+        const {rentBooks,
+            } = this.props;
+
         const onChange = event => {
             this.setState({
                 cnp: event.target.value,
@@ -21,14 +23,13 @@ class ReturnABookPage extends Component {
         }
 
         const getStudentByCnpFromBackend = cnp => {
-
             return fetch('http://localhost:8080/students-by-CNP/' + cnp)
                 .then(r => r.json())
                 .then(r => this.props.setStudentDispatch(r))
                 .catch((err) => {console.log(err)
                 })
-
         }
+
 
         return (
             <div className='return-book-container'>
@@ -44,8 +45,10 @@ class ReturnABookPage extends Component {
                 <PaginationList
                     data={rentBooks}
                     pageSize={3}
-                    renderItem={(rentBook) => (<BookCardToReturn rentBook={rentBook} book={rentBook.book}/>)}
+                    renderItem={(rentBook) => (<BookCardToReturn cnp={this.state.cnp} rentBook={rentBook} book={rentBook.book}/>)}
                 />
+
+
             </div>
         )
     }
@@ -55,6 +58,7 @@ const mapStateToProps = state => ({
     rentBooks: state.fetchRentBooksReducer.rentBooks,
     student: state.setStudentReducer.student,
     canShowName: state.setCanShowNameReducer.canShowName,
+
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -62,6 +66,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     setCanShowNameDispatch: setCanShowNameDispatch,
     setNotRecognizedCnpDispatch: setNotRecognizedCnpDispatch,
     fetchRentBooksByStudentCnpDispatch: fetchRentBooksByStudentCnpDispatch,
+
 
 }, dispatch)
 
