@@ -10,6 +10,7 @@ import setModalBodyDispatch from "../redux/dispatch/SetModalBodyDispatch";
 import '../css/RentBookForm.css';
 import 'antd/dist/antd.css';
 import axios from 'axios';
+import setBooksDispatch from "../redux/dispatch/SetBooksDispatch";
 
 class RentBookForm extends Component {
     state = {
@@ -123,7 +124,9 @@ class RentBookForm extends Component {
                         </div>
                     </div>
                     : null}
-                <Modal title={title} visible={isModalVisible} onOk={()=>{history.push('/available-books')
+                <Modal title={title} visible={isModalVisible} onOk={()=>{
+                    this.props.setBooksDispatch([]);
+                    history.push('/available-books')
                     this.props.setIsModalVisibleDispatch(false);
                 }}
                        onCancel={handleOkAndCancel}>
@@ -151,6 +154,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
         setIsModalVisibleDispatch: setIsModalVisibleDispatch,
         setModalTitleDispatch: setModalTitleDispatch,
         setModalBodyDispatch: setModalBodyDispatch,
+        setBooksDispatch: setBooksDispatch,
     }
     , dispatch)
 
