@@ -30,6 +30,7 @@ class BookCard extends Component {
 
                 <div className='buttons-container'>
                     <Button
+                        disabled={this.props.book.stock === 0}
                         style={{backgroundColor: '#d3ac2b', color: 'white'}}
                         onClick={() => {
                             history.push('/cumpara-o-carte')
