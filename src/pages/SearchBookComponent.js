@@ -47,8 +47,20 @@ class SearchBookComponent extends Component {
                 .catch(err => console.log(err))
         }
 
+        const fetchBooksByParagraph = searchCondition => {
+            return fetch('http://localhost:8080/shazam-book/' + searchCondition)
+                .then(r => r.json())
+                .then(r => this.props.setBooksDispatch(r))
+                .catch(err => console.log(err))
+        }
+
         const fetchBooksByTitleOrAuthor = (typeOfSearchCondition, valueFromTextField) => {
-            typeOfSearchCondition === 'Author' ? fetchBooksByAuthor(valueFromTextField) : fetchBooksByTitle(valueFromTextField)
+
+            switch (typeOfSearchCondition) {
+                case 'Author' : fetchBooksByAuthor(valueFromTextField); break;
+                case 'Title' : fetchBooksByTitle(valueFromTextField); break;
+                case 'Paragraph' : fetchBooksByParagraph(valueFromTextField); break;
+            }
         }
 
         return (
@@ -73,6 +85,10 @@ class SearchBookComponent extends Component {
 
                         <Radio value='Title'>
                             <p>Search by title</p>
+                        </Radio>
+
+                        <Radio value='Paragraph'>
+                            <p>Search by parapgraph</p>
                         </Radio>
                     </Radio.Group>
                 </div>
