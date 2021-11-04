@@ -1,6 +1,8 @@
-.container-inchiriaza-carte{
+.container-inchiriaza-carte {
+    width: 50vw;
 }
-.container-name-or-error{
+
+.container-name-or-error {
     width: 50%;
     margin-inline: auto;
     margin-top: 2%;

@@ -31,6 +31,10 @@ class BookCard extends Component {
                 <div className='buttons-container'>
                     <Button
                         style={{backgroundColor: '#d3ac2b', color: 'white'}}
+                        onClick={() => {
+                            history.push('/cumpara-o-carte')
+                            this.props.setBookToBuyOrRentDispatch(this.props.book)
+                        }}
                     >
                         Cumparati
                     </Button>
@@ -38,11 +42,11 @@ class BookCard extends Component {
                     <Button
                         disabled={this.props.book.stock === 0}
                         onClick={() => {
-                        history.push('/inchiriaza-o-carte')
-                        console.log(this.props.book)
-                        this.props.setBookToBuyOrRentDispatch(this.props.book)
-                    }}
-                            style={{backgroundColor: '#333d51', color: 'white'}}
+                            history.push('/inchiriaza-o-carte')
+                            console.log(this.props.book)
+                            this.props.setBookToBuyOrRentDispatch(this.props.book)
+                        }}
+                        style={{backgroundColor: '#333d51', color: 'white'}}
                     >
                         Inchiriati
                     </Button>
@@ -61,7 +65,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-    setBookToBuyOrRentDispatch:setBookToBuyOrRentDispatch,
+    setBookToBuyOrRentDispatch: setBookToBuyOrRentDispatch,
 }, dispatch)
 
 export default connect(mapStateToProps,

@@ -21,6 +21,7 @@ import setModalTitleReducer from "./redux/reducer/SetModalTitleReducer";
 import setModalBodyReducer from "./redux/reducer/SetModalBodyReducer";
 import fetchRentBooksReducer from "./redux/reducer/FetchRentBooksByStudentCnpReducer";
 import ReturnABookPage from "./pages/ReturnABookPage";
+import BuyABookPage from "./pages/BuyABookPage";
 
 const rootReducer = combineReducers({
     fetchBooksReducer,
@@ -52,6 +53,9 @@ ReactDOM.render(
                 </Route>
                 <Route exact path="/returneaza-o-carte">
                     <ReturnABookPage/>
+                </Route>
+                <Route exact path="/cumpara-o-carte">
+                    <BuyABookPage/>
                 </Route>
                 <Redirect from="/" to="/available-books"/>
             </Switch>
