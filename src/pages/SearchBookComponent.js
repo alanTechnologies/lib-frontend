@@ -34,21 +34,21 @@ class SearchBookComponent extends Component {
         }
 
         const fetchBooksByAuthor = searchCondition => {
-            return fetch('http://localhost:8080/filtered-books-author/' + searchCondition)
+            return fetch('http://localhost:8080/books/by-author/' + searchCondition)
                 .then(r => r.json())
                 .then(r => this.props.setBooksDispatch(r))
                 .catch(err => console.log(err))
         }
 
         const fetchBooksByTitle = searchCondition => {
-            return fetch('http://localhost:8080/filtered-books-title/' + searchCondition)
+            return fetch('http://localhost:8080/books/by-title/' + searchCondition)
                 .then(r => r.json())
                 .then(r => this.props.setBooksDispatch(r))
                 .catch(err => console.log(err))
         }
 
         const fetchBooksByParagraph = searchCondition => {
-            return fetch('http://localhost:8080/shazam-book/' + searchCondition)
+            return fetch('http://localhost:8080/books/by-paragraph/' + searchCondition)
                 .then(r => r.json())
                 .then(r => this.props.setBooksDispatch(r))
                 .catch(err => console.log(err))

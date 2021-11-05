@@ -25,7 +25,7 @@ class InputCnp extends Component {
 
         const getStudentByCnpFromBackend = cnp => {
 
-            return fetch('http://localhost:8080/students-by-CNP/' + cnp)
+            return fetch('http://localhost:8080/students/by-cnp/' + cnp)
                 .then(r => r.json())
                 .then(r => this.props.setStudentDispatch(r))
                 .then(() => this.props.setCanShowNameDispatch(true))
