@@ -43,7 +43,7 @@ class BuyABookPage extends Component {
         const {isModalVisible, bookToRentOrBuy, history, title, body} = this.props;
 
         const buyBook = (name, adress, email, idBook) => {
-            axios.post(`http://localhost:8080/bought-book?name=${name}&adress=${email}&email=${adress}&idBook=${idBook}`)
+            axios.post(`http://localhost:8080/bought-books?name=${name}&adress=${email}&email=${adress}&idBook=${idBook}`)
                 .then(r => console.log(r.status))
                 .catch(err => {
                     console.log(err)
